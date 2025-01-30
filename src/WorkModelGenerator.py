@@ -37,6 +37,7 @@ import logging
 WORKMODEL_PATH = os.path.dirname(os.path.abspath(__file__))
 logger = logging.getLogger(__name__)
 
+random.seed(161)
 
 # Select exactly one service function according to the probability
 # Get in INPUT the list with the internal-service functions
