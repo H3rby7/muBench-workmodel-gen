@@ -1,0 +1,22 @@
+# docker-compose for local testing
+services:
+  wmgen:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    command: 
+        - /bin/bash
+      # - /app/entrypoint.sh
+      # - --log-level
+      # - DEBUG
+    tty: true
+    volumes:
+      # Mount .py files for convenience to test out local changes.
+      - ./src/RunWorkModelGen.py:/app/RunWorkModelGen.py
+      - ./src/WorkModelGenerator.py:/app/WorkModelGenerator.py
+      # Files that are required by runtime
+      - ./example/service_graphs.json:/app/service_graphs.json
+      - ./example/WorkModelParameters.json:/app/WorkModelParameters.json
+      # Output
+      - ./generated:/generated
