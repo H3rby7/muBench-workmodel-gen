@@ -5,11 +5,10 @@ services:
       context: .
       dockerfile: Dockerfile
     working_dir: /app
-    command: 
-        - /bin/bash
-      # - /app/entrypoint.sh
-      # - --log-level
-      # - DEBUG
+    command:
+      - /app/entrypoint.sh
+      - --log-level
+      - DEBUG
     tty: true
     volumes:
       # Mount .py files for convenience to test out local changes.

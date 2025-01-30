@@ -33,6 +33,7 @@
 from WorkModelGenerator import get_work_model, WORKMODEL_PATH
 import json
 import os
+import time
 import logging
 logger = logging.getLogger(__name__)
 
@@ -44,7 +45,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('-c', '--config-file', action='store', dest='parameters_file',
                     help='The WorkModel Parameters file', default=f'{WORKMODEL_PATH}/WorkModelParameters.json')
-parser.add_argument('-l', '--log', action='store', dest='log_level', help='log level', default='warn')
+parser.add_argument('-ll', '--log-level', action='store', dest='log_level', help='Log Level', default='INFO')
 
 argcomplete.autocomplete(parser)
 
@@ -58,10 +59,7 @@ except AttributeError:
 except Exception as err:
     logger.error("Error:", err)
 
-numeric_level = getattr(logging, args.log_level.upper(), None)
-if not isinstance(numeric_level, int):
-    raise ValueError('Invalid log level: %s' % args.log_level)
-logging.basicConfig(level=numeric_level)
+logging.basicConfig(level=args.log_level)
 
 parameters_file_path = args.parameters_file
 
@@ -103,4 +101,5 @@ logger.info(f"Writing workmodel to '{file_path}'")
 with open(f"{output_path}/{output_file}", "w") as f:
     f.write(json.dumps(workmodel, indent=2))
 
+time.sleep(1)
 exit(0)
